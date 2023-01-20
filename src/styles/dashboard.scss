@@ -1,0 +1,9 @@
+.dashboard_wrapper {
+  display: flex;
+  .sidebar_wrapper {
+    width: 20%;
+  }
+  .outlet_wrapper {
+    width: 80%;
+  }
+}

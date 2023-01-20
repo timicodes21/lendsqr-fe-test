@@ -1,0 +1,165 @@
+@use "sass:math";
+
+@import url("https://fonts.cdnfonts.com/css/avenir-next-lt-pro");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap");
+
+// colors
+$fade: #fbfbfb;
+$white: #ffffff;
+$blue: #5718ff;
+$primary: #213f7d;
+$secondary: #545f7d;
+$info: #39cdcc;
+$error: #e4033b;
+$success: #39cd62;
+$warning: #e9b200;
+$orange: #f55f44;
+$purple: #df18ff;
+
+// font sizes
+$twelve: 12px;
+$fourteen: 14px;
+$sixteen: 16px;
+$twenty: 20px;
+$twenty-four: 24px;
+$fourty: 40px;
+
+// font weights
+$light: 400;
+$normal: 500;
+$bold: 600;
+$bolder: 700;
+
+// Base styles
+$base-padding: 0.75rem;
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Avenir Next LT Pro", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-sans {
+  font-family: "Work Sans", sans-serif !important;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+// color Pallete
+$colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "info": $info,
+  "error": $error,
+  "success": $success,
+  "warning": $warning,
+  "orange": $orange,
+  "purple": $purple,
+  "fade": $fade,
+);
+
+// Font weights
+$weights: (
+  "400": $light,
+  "500": $normal,
+  "600": $bold,
+  "700": $bolder,
+);
+
+$sizes: (
+  "12": $twelve,
+  "14": $fourteen,
+  "16": $sixteen,
+  "20": $twenty,
+  "24": $twenty-four,
+  "40": $fourty,
+);
+
+@mixin background-opacity($color, $opacity: 0.1) {
+  background: $color; /* The Fallback */
+  background: rgba($color, $opacity);
+}
+
+@each $key, $val in $colors {
+  .text-#{$key} {
+    color: $val !important;
+  }
+  @if ($val == #ffffff) {
+    .bg-#{$key} {
+      background: $val;
+    }
+  } @else if ($val == #fbfbfb) {
+    .bg-#{$key} {
+      background: $val;
+    }
+  } @else if ($val == #39cdcc) {
+    .bg-#{$key} {
+      background: $val;
+    }
+  } @else {
+    .bg-#{$key} {
+      @include background-opacity($val, 0.1);
+    }
+  }
+}
+
+@each $key, $val in $weights {
+  .font-#{$key} {
+    font-weight: $val !important;
+  }
+}
+
+@each $key, $val in $sizes {
+  .font-#{$key} {
+    font-size: $val !important;
+  }
+}
+
+.h-100 {
+  height: 100vh;
+  overflow-y: hidden !important;
+}
+
+.img-fluid {
+  max-width: 100%;
+}
+
+.pointer {
+  cursor: pointer !important;
+}
+
+.auth_container {
+  overflow: hidden !important;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: #53af5b !important;
+  border-width: 2px !important;
+  border-color: rgba(84, 95, 125, 0.15) !important;
+  border-radius: 5px !important;
+}
+
+.MuiTypography-root {
+  font-family: "Work Sans", sans-serif !important;
+}
