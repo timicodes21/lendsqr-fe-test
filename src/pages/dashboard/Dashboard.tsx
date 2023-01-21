@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../../components/organisms/navbar/Navbar";
 import Sidebar from "../../components/organisms/sidebar/Sidebar";
 import "../../styles/dashboard.scss";
+import Users from "./Users";
 
 const Dashboard = () => {
   return (
@@ -11,7 +12,9 @@ const Dashboard = () => {
         <div className="sidebar_wrapper">
           <Sidebar />
         </div>
-        <div className="outlet"></div>
+        <div className="outlet_wrapper">
+          <Users />
+        </div>
       </div>
     </>
   );

@@ -1,6 +1,11 @@
-.sidebar_container {
-  background: #ffffff;
-  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.04);
-  height: 100vh;
-  
+
+.menu_item {
+  transition: 0.5s;
+}
+
+.menu_item:hover {
+  background: rgba(57, 205, 204, 0.6);
+  p {
+    color: #213f7d !important;
+  }
 }

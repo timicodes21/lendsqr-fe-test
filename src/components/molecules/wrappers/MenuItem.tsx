@@ -1,13 +1,14 @@
 import { Box, Typography } from "@mui/material";
 import React, { ReactNode } from "react";
 import { BsChevronDown } from "react-icons/bs";
+import "../../../styles/navbar.scss";
 
 interface IProps {
   children: ReactNode;
   dropdown?: boolean;
   src: string;
   bright?: boolean;
-  mt?: number;
+  py?: number;
 }
 
 const MenuItem: React.FC<IProps> = ({
@@ -15,10 +16,13 @@ const MenuItem: React.FC<IProps> = ({
   dropdown,
   src,
   bright,
-  mt,
+  py,
 }) => {
   return (
-    <Box className="flex items-center pointer" sx={{ mt }}>
+    <Box
+      className="flex items-center pointer menu_item"
+      sx={{ py, px: "30px" }}
+    >
       <img src={src} />
       <Typography
         className="font-14 font-400 font-sans"
