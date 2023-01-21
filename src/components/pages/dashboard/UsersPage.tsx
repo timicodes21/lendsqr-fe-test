@@ -1,12 +1,17 @@
-import { Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import { dashboardCards } from "../../../data/dashboard";
+import { useGetAllUsers } from "../../../hooks/useFetch";
 import "../../../styles/dashboard.scss";
 import UsersCard from "../../molecules/cards/UsersCard";
+import UsersTable from "../../organisms/tables/UsersTable";
+import ContentWrapper from "../../templates/ContentWrapper";
 
 const UsersPage = () => {
+  const { data, isFetching } = useGetAllUsers();
+  console.log("data", data);
   return (
-    <>
+    <ContentWrapper>
       <Typography className="font-500 font-24 text-primary" sx={{ my: 2 }}>
         Users
       </Typography>
@@ -22,7 +27,12 @@ const UsersPage = () => {
           </Grid>
         ))}
       </Grid>
-    </>
+      <ContentWrapper>
+        <Box sx={{ my: 5 }}>
+          <UsersTable users={data ?? []} />
+        </Box>
+      </ContentWrapper>
+    </ContentWrapper>
   );
 };
 

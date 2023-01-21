@@ -1,4 +1,5 @@
 import React from "react";
+import ToastWrapper from "../../components/molecules/wrappers/ToastWrapper";
 import Navbar from "../../components/organisms/navbar/Navbar";
 import Sidebar from "../../components/organisms/sidebar/Sidebar";
 import "../../styles/dashboard.scss";
@@ -16,6 +17,7 @@ const Dashboard = () => {
           <Users />
         </div>
       </div>
+      <ToastWrapper />
     </>
   );
 };

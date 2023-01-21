@@ -4,6 +4,7 @@ import Login from "./pages/auth/Login";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "./data";
 import Dashboard from "./pages/dashboard/Dashboard";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const router = createBrowserRouter([
