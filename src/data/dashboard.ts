@@ -26,3 +26,29 @@ export const dashboardCards: UsersCardProps[] = [
     total: 102453,
   },
 ];
+
+export const organizations = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
+
+export interface DropdownOption {
+  name: string;
+  src: string;
+}
+
+export const dropdownOptions: DropdownOption[] = [
+  {
+    name: "View Details",
+    src: "/assets/icons/eye.svg",
+  },
+  {
+    name: "Blacklist User",
+    src: "/assets/icons/blacklist.svg",
+  },
+  {
+    name: "Activate User",
+    src: "/assets/icons/activate.svg",
+  },
+];

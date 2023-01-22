@@ -39,3 +39,37 @@
     width: 80%;
   }
 }
+
+.filter_form_container {
+  position: absolute;
+  top: 20px;
+  z-index: 1000 !important;
+  left: 0px;
+  display: none;
+  transition: height 0.5s;
+}
+
+.filter_form_container.active {
+  display: block;
+}
+
+.dropdown_item {
+  transition: 0.5s;
+}
+
+.dropdown_container {
+  position: absolute;
+  top: 30px;
+  z-index: 1000 !important;
+  left: 20px;
+  transform: scaleY(0);
+  transition: 0.5s;
+}
+
+.dropdown_container.active {
+  transform: scaleY(1);
+}
+
+.dropdown_item:hover {
+  background-color: #fbfbfb;
+}

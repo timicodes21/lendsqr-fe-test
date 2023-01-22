@@ -62,6 +62,10 @@ body {
   justify-content: space-between;
 }
 
+.relative {
+  position: relative;
+}
+
 // color Pallete
 $colors: (
   "primary": $primary,
@@ -98,6 +102,7 @@ $sizes: (
   background: rgba($color, $opacity);
 }
 
+// Text and background colors Variant
 @each $key, $val in $colors {
   .text-#{$key} {
     color: $val !important;
@@ -121,12 +126,14 @@ $sizes: (
   }
 }
 
+// Font weights
 @each $key, $val in $weights {
   .font-#{$key} {
     font-weight: $val !important;
   }
 }
 
+// Font sizes
 @each $key, $val in $sizes {
   .font-#{$key} {
     font-size: $val !important;
@@ -154,8 +161,8 @@ a {
   text-decoration: none !important;
 }
 
+// Modified Mui Styles
 .MuiOutlinedInput-notchedOutline {
-  border-color: #53af5b !important;
   border-width: 2px !important;
   border-color: rgba(84, 95, 125, 0.15) !important;
   border-radius: 5px !important;
@@ -213,4 +220,14 @@ a {
   font-size: 14px !important;
   font-weight: 400 !important;
   color: #545f7d;
+}
+
+// Modify React select styles
+
+.css-13cymwt-control {
+  border: 2px solid rgba(84, 95, 125, 0.15) !important;
+}
+
+.css-1u9des2-indicatorSeparator {
+  display: none !important;
 }

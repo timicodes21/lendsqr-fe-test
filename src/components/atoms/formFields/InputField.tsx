@@ -6,6 +6,7 @@ interface IProps {
   type: React.HTMLInputTypeAttribute;
   rightText?: string;
   onClick?: () => void;
+  dashboardInput?: boolean;
 }
 
 const InputField: React.FC<IProps> = ({
@@ -22,10 +23,14 @@ const InputField: React.FC<IProps> = ({
       type={type}
       sx={{ width: "100%" }}
       InputLabelProps={{
-        style: { color: "#545F7D", fontSize: "14px", fontWeight: 400 },
+        style: {
+          color: "#545F7D",
+          fontSize: "14px",
+          fontWeight: 400,
+          borderRadius: "60px",
+        },
       }}
       InputProps={{
-        style: { borderWidth: "3px", borderColor: "yellow !important" },
         endAdornment: (
           <Typography
             className="text-info font-12 font-600 pointer"

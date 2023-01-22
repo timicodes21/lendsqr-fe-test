@@ -4,11 +4,12 @@ import { dashboardCards } from "../../../data/dashboard";
 import { useGetAllUsers } from "../../../hooks/useFetch";
 import "../../../styles/dashboard.scss";
 import UsersCard from "../../molecules/cards/UsersCard";
+import FilterForm from "../../organisms/form/FilterForm";
 import UsersTable from "../../organisms/tables/UsersTable";
 import ContentWrapper from "../../templates/ContentWrapper";
 
 const UsersPage = () => {
-  const { data, isFetching } = useGetAllUsers();
+  const { data, isFetching, status } = useGetAllUsers();
   console.log("data", data);
   return (
     <ContentWrapper>
@@ -27,9 +28,10 @@ const UsersPage = () => {
           </Grid>
         ))}
       </Grid>
+
       <ContentWrapper>
         <Box sx={{ my: 5 }}>
-          <UsersTable users={data ?? []} />
+          <UsersTable users={data ?? []} loading={status === "loading"} />
         </Box>
       </ContentWrapper>
     </ContentWrapper>

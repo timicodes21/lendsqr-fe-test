@@ -8,7 +8,13 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { columns } from "../../../data/table";
-import { Box, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Grid,
+  LinearProgress,
+  Typography,
+} from "@mui/material";
 import { RiArrowUpSFill, RiArrowDownSFill } from "react-icons/ri";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import {
@@ -19,25 +25,28 @@ import {
 import { renderBadgeColor } from "../../../utils/renderBadge";
 import { User } from "../../../types/response";
 import Moment from "react-moment";
+import { useUsersTable } from "../../../hooks/useUsersTable";
+import FilterForm from "../form/FilterForm";
+import TableDropdown from "../../molecules/wrappers/TableDropdown";
 
 interface IProps {
   users: User[];
+  loading?: boolean;
 }
 
-const UsersTable: React.FC<IProps> = ({ users }) => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+const UsersTable: React.FC<IProps> = ({ users, loading }) => {
+  const {
+    rowsPerPage,
+    page,
+    handleChangePage,
+    handleChangeRowsPerPage,
+    showForm,
+    id,
+    handleShowForm,
+    dropId,
+    handleShowDropdown,
+    showDropdown,
+  } = useUsersTable();
 
   return (
     <Paper
@@ -49,11 +58,11 @@ const UsersTable: React.FC<IProps> = ({ users }) => {
         borderRadius: 4,
       }}
     >
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 500 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+              {columns.map((column, index) => (
                 <TableCell
                   sx={{
                     background: "#FFFFFF",
@@ -63,78 +72,95 @@ const UsersTable: React.FC<IProps> = ({ users }) => {
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
-                  <Box className="flex items-center">
-                    <Typography
-                      className="font-12 font-600 text-secondary"
-                      sx={{ mr: 1 }}
+                  <Box className="flex items-center relative">
+                    <div className="">
+                      <Typography
+                        className="font-12 font-600 text-secondary"
+                        sx={{ mr: 1 }}
+                      >
+                        {column.label}
+                      </Typography>
+                    </div>
+                    <div
+                      className="pointer "
+                      onClick={() => handleShowForm(index)}
                     >
-                      {column.label}
-                    </Typography>
-                    <div className="pointer">
                       <img src="/assets/icons/sort.svg" />
                     </div>
+
+                    <FilterForm show={showForm && !loading && id === index} />
                   </Box>
                 </TableCell>
               ))}
             </TableRow>
           </TableHead>
+
           <TableBody>
-            {users
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((item, index) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                    <TableCell align="left">
-                      <Typography className="font-14 font-400 text-secondary">
-                        {firstLetter(item?.orgName)}
-                      </Typography>
-                    </TableCell>
-                    <TableCell align="left">
-                      <Typography className="font-14 font-400 text-secondary">
-                        {item?.userName}
-                      </Typography>
-                    </TableCell>
-                    <TableCell align="left">
-                      <Typography className="font-14 font-400 text-secondary">
-                        {item?.email}
-                      </Typography>
-                    </TableCell>
-                    <TableCell align="left">
-                      <Typography className="font-14 font-400 text-secondary">
-                        {item?.phoneNumber}
-                      </Typography>
-                    </TableCell>
-                    <TableCell align="left">
-                      <Typography className="font-14 font-400 text-secondary">
-                        <Moment format="MMM DD, YYYY HH:MM A">
-                          {item?.lastActiveDate}
-                        </Moment>
-                      </Typography>
-                    </TableCell>
-                    <TableCell
-                      align="left"
-                      className="font-14 font-400 text-secondary flex justify-between items-center"
-                    >
-                      <Typography
-                        component="span"
-                        sx={{ borderRadius: "100px", py: 1, px: 2 }}
-                        className={renderBadgeColor("Inactive")}
+            {!loading &&
+              users
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((item, index) => {
+                  return (
+                    <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                      <TableCell align="left">
+                        <Typography className="font-14 font-400 text-secondary">
+                          {firstLetter(item?.orgName)}
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="left">
+                        <Typography className="font-14 font-400 text-secondary">
+                          {item?.userName}
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="left">
+                        <Typography className="font-14 font-400 text-secondary">
+                          {item?.email}
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="left">
+                        <Typography className="font-14 font-400 text-secondary">
+                          {item?.phoneNumber}
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="left">
+                        <Typography className="font-14 font-400 text-secondary">
+                          <Moment format="MMM DD, YYYY HH:MM A">
+                            {item?.lastActiveDate}
+                          </Moment>
+                        </Typography>
+                      </TableCell>
+                      <TableCell
+                        align="left"
+                        className="font-14 font-400 text-secondary flex justify-between items-center relative"
                       >
-                        Inactive
-                      </Typography>
-                      <div>
-                        <img
-                          className="pointer"
-                          alt="icon"
-                          src="/assets/icons/more_icon.svg"
+                        <Typography
+                          component="span"
+                          sx={{ borderRadius: "100px", py: 1, px: 2 }}
+                          className={renderBadgeColor("Inactive")}
+                        >
+                          Inactive
+                        </Typography>
+                        <div onClick={() => handleShowDropdown(index)}>
+                          <img
+                            className="pointer"
+                            alt="icon"
+                            src="/assets/icons/more_icon.svg"
+                          />
+                        </div>
+                        <TableDropdown
+                          show={showDropdown && !loading && dropId === index}
                         />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
           </TableBody>
         </Table>
+        {loading && (
+          <Box sx={{ width: "100%" }}>
+            <LinearProgress sx={{ color: "#213F7D" }} />
+          </Box>
+        )}
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[5, 10, 15, 20]}

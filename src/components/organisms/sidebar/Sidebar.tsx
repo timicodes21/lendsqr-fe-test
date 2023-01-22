@@ -11,7 +11,7 @@ import MenuItem from "../../molecules/wrappers/MenuItem";
 const Sidebar = () => {
   return (
     <Box className="sidebar_container" sx={{ py: 3 }}>
-      <MenuItem src="/assets/icons/briefcase.svg" dropdown bright py={0}>
+      <MenuItem src="/assets/icons/briefcase.svg" dropdown bright py={1}>
         Switch Organization
       </MenuItem>
       <MenuItem src="/assets/icons/home.svg" py={1}>
